@@ -1,0 +1,15 @@
+{
+    "parent": "tf_15b.config",
+    "steps": {
+        "filter_words": {
+            "func": "tf_zwords.filter_words",
+            "args": ["$frequencies", "z"],
+            "priority": "after:print_freqs"
+        },
+        "print_words": {
+            "func": "print",
+            "args": ["$filter_words"],
+            "priority": "after:filter_words"
+        }
+    }
+}

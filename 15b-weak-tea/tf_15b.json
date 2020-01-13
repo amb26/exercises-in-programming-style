@@ -1,0 +1,49 @@
+{
+    "steps": {
+        "read_file": {
+            "func": "tf_15b.read_file",
+            "args": ["$directArg"],
+            "priority": "first"
+        },
+        "filter_chars": {  
+            "func": "tf_15b.filter_chars",
+            "args": ["$read_file"],
+            "priority": "after:read_file"
+        },
+        "normalize": {
+            "func": "tf_15b.normalize",
+            "args": ["$filter_chars"],
+            "priority": "after:filter_chars"
+        },
+        "tokenize": {
+            "func": "tf_15b.tokenize",
+            "args": ["$normalize"],
+            "priority": "after:normalize"
+        },
+        "remove_stop_words": {
+            "func": "tf_15b.remove_stop_words",
+            "args": ["$tokenize", "../stop_words.txt"],
+            "priority": "after:tokenize"
+        },
+        "frequencies": {
+            "func": "tf_15b.frequencies",
+            "args": ["$remove_stop_words"],
+            "priority": "after:remove_stop_words"
+        },
+        "sort": {
+            "func": "tf_15b.sort",
+            "args": ["$frequencies", true],
+            "priority": "after:frequencies"
+         },
+         "top_freqs": {
+             "func": "tf_15b.top_freqs",
+             "args": ["$sort", 25],
+             "priority": "after:sort"
+         },
+         "print_freqs": {
+             "func": "print",
+             "args": ["$top_freqs"],
+             "priority": "after:top_freqs"
+         }
+     }
+}
