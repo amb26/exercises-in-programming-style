@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import sys, re, operator, string, os, tf_config
+import sys, re, operator, string, tf_config
 
 #
 # The functions
